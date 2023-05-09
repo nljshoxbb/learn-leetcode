@@ -20,3 +20,31 @@ var binaryTreePaths = function (root) {
 
     return res;
 }
+
+// 
+var binaryTreePaths = function (root) {
+    if (!root) {
+        return []
+    }
+    const stack = [root], paths = [""], res = []
+
+    while (stack.length) {
+        const node = stack.pop();
+        let path = paths.pop();
+        if (!node.left && !node.right) {
+            // 到叶子节点终止, 添加路径到结果中
+            res.push(path + node.val)
+            continue
+        }
+        path += node.val + '->';
+        if (node.right) {
+            stack.push(node.right)
+            paths.push(path)
+        }
+        if (node.left) {
+            stack.push(node.left)
+            paths.push(path)
+        }
+    }
+    return res;
+}
