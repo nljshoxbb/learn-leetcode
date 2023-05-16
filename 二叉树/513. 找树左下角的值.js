@@ -16,3 +16,25 @@ var findBottomLeftValue = function (root) {
     dfsTree(root, 1)
     return resNode
 }
+
+// 层序遍历
+var findBottomLeftValue = function (root) {
+    //考虑层序遍历 记录最后一行的第一个节点
+    if (root === null) {
+        return null
+    }
+    let queue = [root];
+    let resNode;
+    while (queue.length) {
+        let length = queue.length;
+        for (let i = 0; i < length; i++) {
+            let node = queue.shift();
+            if (i === 0) {
+                resNode = node.val;
+            }
+            node.left && queue.push(node.left)
+            node.right && queue.push(node.right)
+        }
+    }
+    return resNode
+}
