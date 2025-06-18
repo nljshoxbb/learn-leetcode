@@ -110,7 +110,9 @@ class MinHeapDetailed {
             
             // 交换当前节点和最小子节点
             console.log(`交换 heap[${index}] 和 heap[${minIndex}]`);
-            [this.heap[index], this.heap[minIndex]] = [this.heap[minIndex], this.heap[index]];
+            const swap = this.heap[index];
+            this.heap[index] = this.heap[minIndex];
+            this.heap[minIndex] = swap;
             console.log(`交换后: [${this.heap.join(', ')}]`);
             
             index = minIndex;

@@ -56,7 +56,10 @@ class MinHeap {
         while (index > 0) {
             const parentIndex = Math.floor((index - 1) / 2);
             if (this.heap[parentIndex] <= this.heap[index]) break;
-            [this.heap[parentIndex], this.heap[index]] = [this.heap[index], this.heap[parentIndex]];
+            const swap = this.heap[parentIndex];
+            this.heap[parentIndex] = this.heap[index];
+            this.heap[index] = swap;
+            // 更新当前处理节点的索引，让循环继续向上检查父节点。
             index = parentIndex;
         }
     }
@@ -73,9 +76,14 @@ class MinHeap {
             if (rightChild < this.heap.length && this.heap[rightChild] < this.heap[minIndex]) {
                 minIndex = rightChild;
             }
-            
+             // 如果当前节点已经是最小的，停止下沉
             if (minIndex === index) break;
-            [this.heap[index], this.heap[minIndex]] = [this.heap[minIndex], this.heap[index]];
+
+             // 交换当前节点和最小子节点
+            const swap = this.heap[index];
+            this.heap[index] = this.heap[minIndex];
+            this.heap[minIndex] = swap;
+            // 更新当前处理节点的索引，让循环继续向下检查子节点。
             index = minIndex;
         }
     }
